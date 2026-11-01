@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SaveFile — Private workspace</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="loginScreen" class="login-wrap">
+    <form id="loginForm" class="login-card">
+      <div class="brand-mark">S</div><p class="eyebrow">PRIVATE WORKSPACE</p>
+      <h1>Welcome to SaveFile</h1><p class="muted">Sign in to access your shared files and code.</p>
+      <label for="password">Workspace password</label>
+      <input id="password" type="password" placeholder="Enter password" autocomplete="current-password" required>
+      <button class="primary full" type="submit">Log in <span>→</span></button>
+      <p id="loginError" class="error" role="alert"></p>
+      <p class="login-foot">Private access · Shared workspace</p>
+    </form>
+  </div>
+
+  <div id="appScreen" class="app hidden">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark small">S</span><span>SaveFile<small>WORKSPACE</small></span></a>
+      <p class="nav-label">WORKSPACE</p>
+      <button class="nav-link active" data-page="dashboard"><span>▦</span> Overview</button>
+      <button class="nav-link" data-page="save"><span>＋</span> Save a file</button>
+      <button class="nav-link" data-page="files"><span>▤</span> View files & code</button>
+      <div class="sidebar-bottom"><div class="secure"><span>●</span><div>Protected workspace<small>Signed-in access only</small></div></div><button id="logoutBtn" class="logout">↪ Log out</button></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><p class="eyebrow">YOUR WORKSPACE</p><h2 id="pageTitle">Overview</h2></div><div class="top-right"><span class="status-dot"></span> Shared workspace <span class="avatar">U</span></div></header>
+      <section id="dashboardPage" class="page">
+        <div class="welcome"><div><p class="eyebrow">WELCOME BACK</p><h1>Keep your work in one place.</h1><p class="muted">Save notes, project files and code snippets in your private workspace.</p></div><button class="primary" data-go="save">＋ Save new item</button></div>
+        <div class="stats"><article class="stat"><span>Total saved items</span><strong id="totalCount">0</strong><small>Files and code entries</small></article><article class="stat"><span>Code snippets</span><strong id="codeCount">0</strong><small>Reusable code</small></article><article class="stat"><span>Text files</span><strong id="fileCount">0</strong><small>Notes and documents</small></article></div>
+        <div class="section-head"><div><h3>Recently saved</h3><p class="muted">Your latest workspace items</p></div><button class="text-btn" data-go="files">View all →</button></div>
+        <div id="recentList" class="entry-list"></div>
+      </section>
+      <section id="savePage" class="page hidden">
+        <div class="form-card"><div class="form-heading"><h3 id="formHeading">Save a new item</h3><p class="muted">Add file details or paste your code below.</p></div>
+          <form id="entryForm">
+            <input type="hidden" id="entryId">
+            <div class="field-grid"><div class="field"><label for="title">Title *</label><input id="title" maxlength="120" placeholder="e.g. Smart Energy Monitor" required></div>
+              <div class="field"><label for="kind">Item type</label><select id="kind"><option value="code">Code</option><option value="file">Text / File</option></select></div></div>
+            <div class="field"><label for="description">Description</label><input id="description" maxlength="1000" placeholder="What is this item for?"></div>
+            <div class="field-grid"><div class="field"><label for="filename">File name (optional)</label><input id="filename" placeholder="main.py"></div><div class="field"><label for="language">Language / format</label><input id="language" placeholder="JavaScript, Python, HTML..."></div></div>
+            <div class="field"><label for="content">File content / code *</label><textarea id="content" rows="14" placeholder="Paste your text or code here..." required spellcheck="false"></textarea></div>
+            <div class="form-actions"><button type="button" id="cancelEdit" class="secondary hidden">Cancel</button><button class="primary" type="submit">Save item</button></div>
+            <p id="saveMessage" class="message" role="status"></p>
+          </form>
+        </div>
+      </section>
+      <section id="filesPage" class="page hidden">
+        <div class="section-head files-heading"><div><h3>Files & code</h3><p class="muted">Browse, search and open saved content.</p></div><button class="primary" data-go="save">＋ Save new item</button></div>
+        <div class="toolbar"><input id="searchInput" placeholder="Search by title, file name or description..."><select id="filterKind"><option value="all">All items</option><option value="code">Code only</option><option value="file">Text / files only</option></select></div>
+        <div id="allList" class="entry-list"></div>
+      </section>
+    </main>
+  </div>
+  <div id="viewer" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><div class="viewer-card"><div class="viewer-head"><div><p class="eyebrow">SAVED CONTENT</p><h3 id="viewerTitle">Item</h3><p id="viewerMeta" class="muted"></p></div><button id="closeViewer" class="icon-btn" aria-label="Close">✕</button></div><p id="viewerDescription" class="viewer-description"></p><pre><code id="viewerContent"></code></pre><div class="viewer-actions"><button id="copyBtn" class="secondary">Copy content</button><button id="editBtn" class="secondary">Edit</button><button id="deleteBtn" class="danger">Delete</button></div></div></div>
+  <script src="/app.js"></script>
+</body></html>
